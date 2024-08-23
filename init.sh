@@ -1,5 +1,14 @@
 #!/bin/bash
 set -e
+# Decode the base64 encoded environment variables
+RANCHER_SERVER=$(echo "$BASE64_RANCHER_SERVER" | base64 --decode)
+API_TOKEN=$(echo "$BASE64_API_TOKEN" | base64 --decode)
+CLUSTER_ID=$(echo "$BASE64_CLUSTER_ID" | base64 --decode)
+
+# Debugging: Print decoded values (remove these lines in production)
+echo "Decoded RANCHER_SERVER: $RANCHER_SERVER"
+echo "Decoded API_TOKEN: $API_TOKEN"
+echo "Decoded CLUSTER_ID: $CLUSTER_ID"
 
 # Check if environment variables are set
 if [ -z "$RANCHER_SERVER" ] || [ -z "$API_TOKEN" ] || [ -z "$CLUSTER_ID" ]; then
