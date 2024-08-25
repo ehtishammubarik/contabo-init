@@ -1,5 +1,14 @@
 #!/bin/bash
 set -e
+
+# Source the environment variables from the .env file
+if [ -f /etc/rancher_init.env ]; then
+  source /etc/rancher_init.env
+else
+  echo "Error: /etc/rancher_init.env file not found."
+  exit 1
+fi
+
 # Decode the base64 encoded environment variables
 RANCHER_SERVER=$(echo "$BASE64_RANCHER_SERVER" | base64 --decode)
 API_TOKEN=$(echo "$BASE64_API_TOKEN" | base64 --decode)
